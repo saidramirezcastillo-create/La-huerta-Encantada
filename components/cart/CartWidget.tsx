@@ -15,9 +15,8 @@ export default function CartWidget() {
       <CartButton abrir={() => setAbierto(true)} />
 
       <CartDrawer
-        abierto={abierto}
-        cerrar={() => setAbierto(false)}
-        abrirReserva={() => setAbrirReserva(true)}
+      abierto={abierto}
+      cerrar={() => setAbierto(false)}
       />
 
       <Modal
