@@ -31,23 +31,28 @@ export default function DetallePlato({ plato }: Props) {
 
     setMensaje(true);
 
+    // Ahora dura 6 segundos
     setTimeout(() => {
       setMensaje(false);
-    }, 2500);
+    }, 6000);
+  };
+
+  const verCarrito = () => {
+    setMensaje(false);
+
+    window.dispatchEvent(new Event("abrir-carrito"));
   };
 
   return (
     <>
       <div className="grid lg:grid-cols-2 gap-10">
 
-        {/* Imagen */}
         <img
           src={plato.imagen}
           alt={plato.nombre}
           className="w-full h-[450px] object-cover rounded-3xl shadow-xl"
         />
 
-        {/* Información */}
         <div>
 
           <span className="bg-yellow-500 px-4 py-2 rounded-full font-bold">
@@ -102,11 +107,8 @@ export default function DetallePlato({ plato }: Props) {
 
       </div>
 
-      {/* Notificación Premium */}
       {mensaje && (
-        <div
-          className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl border border-green-200 p-4 w-80 z-[9999] animate-[slideIn_.4s_ease]"
-        >
+        <div className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl border border-green-200 p-4 w-80 z-[9999] animate-[slideIn_.4s_ease]">
 
           <div className="flex gap-4">
 
@@ -146,7 +148,10 @@ export default function DetallePlato({ plato }: Props) {
                     : plato.precio}
                 </span>
 
-                <button className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-full text-sm font-semibold transition">
+                <button
+                  onClick={verCarrito}
+                  className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
+                >
                   🛒 Ver carrito
                 </button>
 
