@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import CartaPremium from "./CartaPremium";
 import Reserva from "./Reserva";
+import FiestasPatrias from "./FiestasPatrias";
 
 export default function Hero() {
 
@@ -28,14 +29,16 @@ export default function Hero() {
     <>
 
       <section
-        id="inicio"
-        className="relative min-h-screen bg-cover bg-center overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/hero.jpg')",
-        }}
-      >
+  id="inicio"
+  className="relative min-h-screen bg-cover bg-center overflow-hidden"
+  style={{
+    backgroundImage: "url('/images/hero.jpg')",
+  }}
+>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1d14]/90 via-[#0b1d14]/60 to-transparent"></div>
+  <FiestasPatrias />
+
+  <div className="absolute inset-0 bg-gradient-to-r from-[#0b1d14]/90 via-[#0b1d14]/60 to-transparent"></div>
 
         <div className="relative z-10 flex items-center min-h-screen">
 

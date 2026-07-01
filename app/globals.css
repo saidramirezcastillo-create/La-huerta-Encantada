@@ -61,3 +61,374 @@ body {
 .animate-\[slideIn_\.4s_ease\] {
   animation: slideIn .4s ease;
 }
+/* =======================================================
+   🇵🇪 FIESTAS PATRIAS
+======================================================= */
+
+.fiesta-float{
+  top:-60px;
+  user-select:none;
+  animation-name:fiestaFloat;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.6));
+}
+
+@keyframes fiestaFloat{
+
+  0%{
+    transform:
+      translateY(-80px)
+      rotate(0deg)
+      translateX(0px);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  30%{
+    transform:
+      translateY(30vh)
+      rotate(90deg)
+      translateX(15px);
+  }
+
+  50%{
+    transform:
+      translateY(55vh)
+      rotate(180deg)
+      translateX(-20px);
+  }
+
+  75%{
+    transform:
+      translateY(80vh)
+      rotate(260deg)
+      translateX(25px);
+  }
+
+  100%{
+    transform:
+      translateY(110vh)
+      rotate(360deg)
+      translateX(-15px);
+
+    opacity:0;
+  }
+
+}
+
+/* Brillo */
+
+.fiesta-brillo{
+
+  animation:brillo 2s infinite ease-in-out;
+
+}
+
+@keyframes brillo{
+
+  0%{
+    opacity:.4;
+    transform:scale(.8);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.15);
+  }
+
+  100%{
+    opacity:.4;
+    transform:scale(.8);
+  }
+
+}
+
+/* Escarapelas */
+
+.escarapela{
+
+  animation:girarEscarapela 8s linear infinite;
+
+}
+
+@keyframes girarEscarapela{
+
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+/* Bandera */
+
+.bandera-wave{
+
+  animation:waveFlag 3s ease-in-out infinite;
+
+  transform-origin:left center;
+
+}
+
+@keyframes waveFlag{
+
+  0%{
+    transform:rotate(-1deg);
+  }
+
+  25%{
+    transform:rotate(2deg);
+  }
+
+  50%{
+    transform:rotate(-2deg);
+  }
+
+  75%{
+    transform:rotate(2deg);
+  }
+
+  100%{
+    transform:rotate(-1deg);
+  }
+
+}
+/* ============================================
+      FUEGOS ARTIFICIALES
+============================================ */
+
+.firework{
+
+    position:absolute;
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    animation:explode 6s infinite;
+
+}
+
+.firework::before,
+.firework::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+}
+
+.firework::before{
+
+    box-shadow:
+    0 -70px #ffd700,
+    50px -50px #ff2d55,
+    70px 0 #ffffff,
+    50px 50px #e63946,
+    0 70px #ffd700,
+    -50px 50px #ffffff,
+    -70px 0 #ff2d55,
+    -50px -50px #ffd700;
+
+}
+
+.firework::after{
+
+    box-shadow:
+    0 -40px white,
+    40px -40px gold,
+    40px 40px red,
+    -40px 40px white,
+    -40px -40px gold;
+
+}
+
+@keyframes explode{
+
+0%{
+
+transform:scale(0);
+
+opacity:0;
+
+}
+
+15%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+40%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(1.6);
+
+opacity:0;
+
+}
+
+}
+/* ==========================================
+        NUBES
+========================================== */
+
+.cloud{
+
+position:fixed;
+
+left:-200px;
+
+font-size:60px;
+
+opacity:.25;
+
+pointer-events:none;
+
+z-index:2;
+
+animation:moverNube 35s linear infinite;
+
+}
+
+@keyframes moverNube{
+
+0%{
+
+transform:translateX(0);
+
+}
+
+100%{
+
+transform:translateX(calc(100vw + 400px));
+
+}
+
+}
+
+/* ==========================================
+        CONDOR
+========================================== */
+
+.condor{
+
+position:fixed;
+
+left:-120px;
+
+font-size:48px;
+
+z-index:6;
+
+pointer-events:none;
+
+animation:volarCondor 22s linear infinite;
+
+}
+
+@keyframes volarCondor{
+
+0%{
+
+transform:
+translateX(0)
+translateY(0)
+scale(1);
+
+}
+
+50%{
+
+transform:
+translateX(55vw)
+translateY(-30px)
+scale(1.15);
+
+}
+
+100%{
+
+transform:
+translateX(calc(100vw + 300px))
+translateY(0)
+scale(1);
+
+}
+
+}
+
+/* ==========================================
+        SOL
+========================================== */
+
+.sun-glow{
+
+position:fixed;
+
+right:-180px;
+
+top:-180px;
+
+width:420px;
+
+height:420px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+rgba(255,230,120,.8),
+rgba(255,210,80,.15),
+transparent);
+
+filter:blur(25px);
+
+animation:solRespira 5s ease-in-out infinite;
+
+pointer-events:none;
+
+z-index:1;
+
+}
+
+@keyframes solRespira{
+
+0%{
+
+transform:scale(.95);
+
+}
+
+50%{
+
+transform:scale(1.1);
+
+}
+
+100%{
+
+transform:scale(.95);
+
+}
+
+}
