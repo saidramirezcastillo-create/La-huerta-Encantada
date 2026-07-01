@@ -307,11 +307,11 @@ const TicketPedido = forwardRef<HTMLDivElement, Props>(
             <div className="border-t border-green-700 my-8"></div>
 
             <p className="text-lg">
-              📍 Chachapoyas - Amazonas
+              📍 Calle Lopez de Zuñiga - Chancay
             </p>
 
             <p className="mt-2 text-lg">
-              📱 WhatsApp: 966 079 958
+              📱 WhatsApp: 977 774 470
             </p>
 
             <p className="mt-6 text-yellow-300 font-bold text-xl">

@@ -18,13 +18,17 @@ export default function Home() {
       <Hero />
       <Stats />
       <About />
+
+      {/* SOLO FAVORITOS */}
       <MenuPremium />
+
       <Events />
       <Gallery />
       <VideoSection />
       <Testimonials />
       <Reservation />
       <Footer />
+
       <CartWidget />
     </>
   );

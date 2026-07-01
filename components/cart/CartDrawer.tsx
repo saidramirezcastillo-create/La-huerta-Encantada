@@ -118,7 +118,10 @@ Muchas gracias por preferir *La Huerta Encantada* ❤️`;
 setUrlWhatsapp(url);
 
 setMostrarModal(false);
-cerrar();
+
+// NO cerrar aquí el carrito.
+// El carrito se cerrará cuando el usuario pulse
+// "Finalizar Pedido".
 
 } catch (error) {
 

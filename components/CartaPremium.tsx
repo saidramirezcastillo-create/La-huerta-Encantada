@@ -1,240 +1,236 @@
 "use client";
 
 import { useState } from "react";
-import { useCart } from "./cart/CartContext";
 
-const categorias = ["Platos", "Piqueos", "Bebidas"];
+import { menu } from "./cart/data/menu";
 
-const productos = [
-  {
-    id: 1,
-    categoria: "Platos",
-    nombre: "Pato Asado",
-    descripcion: "Nuestro plato estrella preparado con receta tradicional.",
-    precio: 48,
-    imagen: "/images/platos/pato.jpg",
-  },
-  {
-    id: 2,
-    categoria: "Platos",
-    nombre: "Chaufa Especial",
-    descripcion: "Arroz chaufa preparado al wok con pollo y verduras.",
-    precio: 32,
-    imagen: "/images/platos/chaufa.jpg",
-  },
-  {
-    id: 3,
-    categoria: "Piqueos",
-    nombre: "Alitas Broaster",
-    descripcion: "Crujientes alitas con papas fritas.",
-    precio: 28,
-    imagen: "/images/platos/alitas.jpg",
-  },
-  {
-    id: 4,
-    categoria: "Piqueos",
-    nombre: "Salchipapa",
-    descripcion: "Papas crocantes con salchichas.",
-    precio: 20,
-    imagen: "/images/platos/salchipapa.jpg",
-  },
-  {
-    id: 5,
-    categoria: "Bebidas",
-    nombre: "Limonada Frozen",
-    descripcion: "Preparada al instante.",
-    precio: 10,
-    imagen: "/images/bebida.jpg",
-  },
-];
+import MenuCategorias from "./MenuCategorias";
+
+import BuscadorCarta from "./BuscadorCarta";
+
+import MenuCard from "./MenuCard";
+
+import FiltrosCarta from "./FiltrosCarta";
 
 export default function CartaPremium() {
 
-  const [categoria, setCategoria] = useState("Platos");
+  const [categoria, setCategoria] = useState("menu");
 
-  const {
-    carrito,
-    agregarProducto,
-    eliminarProducto,
-    total,
-  } = useCart();
+  const [buscar, setBuscar] = useState("");
 
-  const filtrados =
-    productos.filter((p) => p.categoria === categoria);
+  const [filtro, setFiltro] = useState("todos");
+
+  const productos = menu.filter((plato) => {
+
+  const coincideCategoria = plato.categoria === categoria;
+
+  const coincideBusqueda = plato.nombre
+    .toLowerCase()
+    .includes(buscar.toLowerCase());
+
+  let coincideFiltro = true;
+
+  switch (filtro) {
+
+    case "vendidos":
+  coincideFiltro = (plato.ventas ?? 0) >= 300;
+  break;
+
+    case "chef":
+      coincideFiltro = plato.chef === true;
+      break;
+
+    case "premium":
+      coincideFiltro = (plato.rating ?? 0) >= 4.8;
+      break;
+
+    default:
+      coincideFiltro = true;
+  }
+
+  return (
+    coincideCategoria &&
+    coincideBusqueda &&
+    coincideFiltro
+  );
+
+});
 
   return (
 
-    <div>
+    <section
+      id="carta"
+      className="py-24 bg-gradient-to-b from-[#f8f7f2] to-white"
+    >
 
-      {/* Categorías */}
+      <div className="max-w-7xl mx-auto px-6">
 
-      <div className="flex justify-center gap-4 mb-10 flex-wrap">
+        {/* Título */}
 
-        {categorias.map((cat) => (
+        <div className="text-center mb-16">
 
-          <button
-            key={cat}
-            onClick={() => setCategoria(cat)}
-            className={`px-6 py-3 rounded-full font-bold duration-300 ${
-              categoria === cat
-                ? "bg-yellow-500 text-black"
-                : "bg-gray-200 hover:bg-yellow-300"
-            }`}
-          >
-            {cat}
-          </button>
+          <span className="text-green-700 font-bold tracking-[4px] uppercase">
 
-        ))}
+            Nuestra Carta
 
-      </div>
+          </span>
 
-      {/* Productos + Carrito */}
+          <h2 className="titulo text-5xl text-green-900 mt-4">
 
-      <div className="grid lg:grid-cols-3 gap-8">
+            Descubre nuestros sabores
 
-        {/* Productos */}
+          </h2>
 
-        <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
+          <p className="text-gray-600 mt-5 max-w-2xl mx-auto">
 
-          {filtrados.map((plato) => (
+            Elige la categoría que deseas explorar y agrega tus platos
+            favoritos al pedido.
 
-            <div
-              key={plato.id}
-              className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl duration-300"
-            >
-
-              <img
-                src={plato.imagen}
-                alt={plato.nombre}
-                className="w-full h-64 object-cover"
-              />
-
-              <div className="p-6">
-
-                <h2 className="titulo text-3xl text-green-900">
-                  {plato.nombre}
-                </h2>
-
-                <p className="mt-3 text-gray-600">
-                  {plato.descripcion}
-                </p>
-
-                <div className="flex justify-between items-center mt-6">
-
-                  <span className="text-2xl font-bold text-yellow-600">
-                    S/. {plato.precio.toFixed(2)}
-                  </span>
-
-                  <button
-                    onClick={() =>
-                      agregarProducto({
-                        id: plato.id,
-                        nombre: plato.nombre,
-                        precio: plato.precio,
-                        imagen: plato.imagen,
-                        cantidad: 1,
-                      })
-                    }
-                    className="bg-green-900 hover:bg-green-700 text-white px-5 py-3 rounded-full duration-300"
-                  >
-                    🛒 Agregar
-                  </button>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          ))}
+          </p>
 
         </div>
 
-        {/* Carrito */}
+        {/* Categorías */}
 
-        <div className="bg-white rounded-3xl shadow-xl p-6 h-fit sticky top-5">
+        <MenuCategorias
+          categoria={categoria}
+          cambiarCategoria={setCategoria}
+        />
 
-          <h2 className="titulo text-3xl text-green-900 mb-6">
-            🛒 Mi Pedido
-          </h2>
+        {/* Buscador */}
 
-          {carrito.length === 0 ? (
+        <BuscadorCarta
+          buscar={buscar}
+          setBuscar={setBuscar}
+        />
 
-            <div className="text-center py-10">
+        {/* Filtros Cartas */}
+          <FiltrosCarta
+          filtro={filtro}
+          cambiarFiltro={setFiltro}
+          />
 
-              <p className="text-gray-500">
-                No has agregado productos.
-              </p>
+         {/* Productos */}
 
-            </div>
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 mt-14">
+
+          {productos.length > 0 ? (
+
+            productos.map((plato) => (
+
+              <MenuCard
+                key={plato.id}
+                plato={plato}
+              />
+
+            ))
 
           ) : (
 
-            <>
+            <div className="col-span-full">
 
-              <div className="space-y-4">
+              <div className="bg-white rounded-3xl shadow-xl p-16 text-center">
 
-                {carrito.map((item) => (
+                <div className="text-7xl mb-6">
 
-                  <div
-                    key={item.id}
-                    className="flex justify-between items-center border-b pb-3"
-                  >
-
-                    <div>
-
-                      <h3 className="font-semibold">
-                        {item.nombre}
-                      </h3>
-
-                      <p className="text-sm text-gray-500">
-                        Cantidad: {item.cantidad}
-                      </p>
-
-                    </div>
-
-                    <button
-                      onClick={() => eliminarProducto(item.id)}
-                      className="text-red-500 hover:text-red-700 text-xl"
-                    >
-                      ✕
-                    </button>
-
-                  </div>
-
-                ))}
-
-              </div>
-
-              <div className="border-t mt-8 pt-6">
-
-                <div className="flex justify-between text-xl font-bold">
-
-                  <span>Total</span>
-
-                  <span>
-                    S/. {total.toFixed(2)}
-                  </span>
+                  🍽️
 
                 </div>
 
-                <button
-                  className="mt-6 w-full bg-green-900 hover:bg-green-700 text-white py-4 rounded-full font-bold duration-300"
-                >
-                  Continuar Reserva →
-                </button>
+                <h2 className="text-3xl font-bold text-green-900">
+
+                  No encontramos resultados
+
+                </h2>
+
+                <p className="text-gray-500 mt-4 text-lg">
+
+                  Prueba buscando otro plato o cambia de categoría.
+
+                </p>
 
               </div>
 
-            </>
+            </div>
 
           )}
 
         </div>
+        {/* Favoritos de la Casa */}
+
+<div className="mt-24">
+
+  <div className="text-center mb-12">
+
+    <span className="text-red-600 font-bold tracking-[4px] uppercase">
+      Los Más Pedidos
+    </span>
+
+    <h2 className="titulo text-5xl text-green-900 mt-4">
+      🔥 Favoritos de Nuestros Clientes
+    </h2>
+
+    <p className="text-gray-500 mt-3">
+      Los platos estrella de La Huerta Encantada.
+    </p>
+
+  </div>
+
+  <div className="grid md:grid-cols-3 gap-8">
+
+    {menu
+      .filter((plato) => plato.categoria === "menu")
+      .slice(0, 3)
+      .map((plato) => (
+
+        <div
+          key={plato.id}
+          className="group relative rounded-3xl overflow-hidden shadow-2xl"
+        >
+
+          <img
+            src={plato.imagen}
+            alt={plato.nombre}
+            className="w-full h-96 object-cover group-hover:scale-110 duration-700"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6">
+
+            <span className="bg-red-600 text-white px-4 py-2 rounded-full font-bold">
+              🔥 Más Vendido
+            </span>
+
+            <h3 className="text-white text-3xl font-bold mt-4">
+              {plato.nombre}
+            </h3>
+
+            <p className="text-yellow-300 mt-2 text-lg">
+              ⭐ {plato.rating}
+            </p>
+
+            <p className="text-white">
+              {plato.ventas} pedidos
+            </p>
+
+            <p className="text-3xl font-bold text-yellow-400 mt-4">
+              S/. {plato.precio.toFixed(2)}
+            </p>
+
+          </div>
+
+        </div>
+
+      ))}
+
+  </div>
+
+</div>
 
       </div>
 
-    </div>
+    </section>
 
   );
 

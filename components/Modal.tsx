@@ -1,7 +1,9 @@
-interface ModalProps {
+"use client";
+
+interface Props {
   abierto: boolean;
   cerrar: () => void;
-  titulo: string;
+  titulo?: string;
   children: React.ReactNode;
 }
 
@@ -10,35 +12,29 @@ export default function Modal({
   cerrar,
   titulo,
   children,
-}: ModalProps) {
+}: Props) {
   if (!abierto) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-6">
 
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden animate-[fadeIn_.3s_ease]">
+      <div className="bg-white rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
 
-        {/* Encabezado */}
-        <div className="bg-[#13351f] text-white px-8 py-6 flex justify-between items-center">
+        <button
+          onClick={cerrar}
+          className="absolute top-5 right-5 text-3xl font-bold"
+        >
+          ✕
+        </button>
 
-          <h2 className="titulo text-3xl">
+        {titulo && (
+          <h2 className="text-3xl font-bold text-center mt-8">
             {titulo}
           </h2>
+        )}
 
-          <button
-            onClick={cerrar}
-            className="text-4xl hover:text-yellow-400 duration-300"
-          >
-            ×
-          </button>
-
-        </div>
-
-        {/* Contenido */}
-        <div className="p-8 overflow-y-auto max-h-[70vh]">
-
+        <div className="p-8">
           {children}
-
         </div>
 
       </div>

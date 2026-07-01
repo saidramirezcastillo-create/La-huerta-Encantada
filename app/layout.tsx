@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
+
 import { CartProvider } from "../components/cart/CartContext";
+import { ToastProvider } from "../components/ToastContext";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -28,12 +30,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-  className={`${playfair.variable} ${poppins.variable} font-[var(--font-poppins)] bg-[#F8F5F0] text-gray-800`}
->
-  <CartProvider>
-    {children}
-  </CartProvider>
-</body>
+        className={`${playfair.variable} ${poppins.variable} font-[var(--font-poppins)] bg-[#F8F5F0] text-gray-800`}
+      >
+        <CartProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </CartProvider>
+      </body>
     </html>
   );
 }

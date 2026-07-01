@@ -36,11 +36,11 @@ export default function Footer() {
             Contacto
           </h3>
 
-          <p>📍 Tu dirección</p>
+          <p>📍 Calle Lopez de Zuñiga - Chancay</p>
 
-          <p>📞 +51 999 999 999</p>
+          <p>📞 +51 977 774 478</p>
 
-          <p>✉ contacto@lahuerta.com</p>
+          <p>✉ edsonortizvalencia@gmail.com</p>
 
         </div>
 

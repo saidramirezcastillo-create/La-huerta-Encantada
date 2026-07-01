@@ -29,13 +29,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-5">
 
         {/* Logo */}
-
-        <a href="#" className="titulo text-3xl text-yellow-400">
+        <a
+          href="#inicio"
+          className="titulo text-3xl text-yellow-400"
+        >
           La Huerta
         </a>
 
         {/* Menú escritorio */}
-
         <nav className="hidden lg:flex gap-10 text-white">
 
           <a href="#inicio" className="hover:text-yellow-400 duration-300">
@@ -64,14 +65,15 @@ export default function Navbar() {
 
         </nav>
 
-        {/* Botón */}
-
-        <button className="hidden lg:block bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-3 rounded-full duration-300">
+        {/* Botón Reservar */}
+        <a
+          href="#contacto"
+          className="hidden lg:block bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-3 rounded-full duration-300"
+        >
           Reservar
-        </button>
+        </a>
 
         {/* Menú móvil */}
-
         <button
           onClick={() => setMenuAbierto(!menuAbierto)}
           className="lg:hidden text-white text-4xl"
@@ -82,9 +84,7 @@ export default function Navbar() {
       </div>
 
       {/* Menú móvil */}
-
       {menuAbierto && (
-
         <div className="lg:hidden bg-[#13351f] text-white">
 
           <a
@@ -136,7 +136,6 @@ export default function Navbar() {
           </a>
 
         </div>
-
       )}
     </header>
   );

@@ -1,52 +1,84 @@
+"use client";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
 const imagenes = [
-  "/images/galeria/foto1.jpg",
-  "/images/galeria/foto2.jpg",
-  "/images/galeria/foto3.jpg",
-  "/images/galeria/foto4.jpg",
-  "/images/galeria/foto5.jpg",
-  "/images/galeria/foto6.jpg",
+  "/images/gallery1.jpg",
+  "/images/gallery2.jpg",
+  "/images/gallery3.jpg",
+  "/images/gallery4.jpg",
+  "/images/gallery5.jpg",
+  "/images/gallery6.jpg",
 ];
 
 export default function Gallery() {
   return (
     <section
       id="galeria"
-      className="bg-white py-24"
+      className="py-24 bg-[#faf8f3]"
     >
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl mx-auto px-6">
 
-        <p className="text-center uppercase tracking-[5px] text-green-700">
-          Galería
-        </p>
+        <div className="text-center mb-14">
 
-        <h2 className="text-center text-5xl font-bold text-gray-800 mt-3">
-          Vive La Experiencia
-        </h2>
+          <span className="uppercase tracking-[5px] text-yellow-600 font-bold">
+            Nuestra Galería
+          </span>
 
-        <p className="text-center text-gray-500 mt-5 mb-16">
-          Conoce nuestros espacios y disfruta de un ambiente rodeado de naturaleza.
-        </p>
+          <h2 className="titulo text-5xl text-green-900 mt-4">
+            Vive la experiencia
+          </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
-
-          {imagenes.map((imagen, index) => (
-
-            <div
-              key={index}
-              className="overflow-hidden rounded-3xl shadow-xl"
-            >
-
-              <img
-                src={imagen}
-                alt={`Galería ${index + 1}`}
-                className="w-full h-72 object-cover hover:scale-110 duration-500"
-              />
-
-            </div>
-
-          ))}
+          <p className="text-gray-500 mt-4">
+            Algunos momentos de La Huerta Encantada
+          </p>
 
         </div>
+
+        <Swiper
+          modules={[Autoplay, EffectCoverflow, Pagination]}
+          effect="coverflow"
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          coverflowEffect={{
+            rotate: 20,
+            stretch: 0,
+            depth: 150,
+            modifier: 2,
+            slideShadows: true,
+            scale: 0.9,
+          }}
+          pagination={{ clickable: true }}
+          className="pb-16"
+        >
+          {imagenes.map((img, index) => (
+            <SwiperSlide
+              key={index}
+              style={{ width: "420px" }}
+            >
+              <div className="overflow-hidden rounded-3xl shadow-2xl">
+
+                <img
+                  src={img}
+                  alt={`Galería ${index + 1}`}
+                  className="w-full h-[520px] object-cover hover:scale-110 duration-700"
+                />
+
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
       </div>
     </section>
